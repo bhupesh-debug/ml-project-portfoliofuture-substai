@@ -1,12 +1,22 @@
 import pandas as pd
 import os
 
-def load_fund_profiles(path='data/synthetic/fund_universe_profiles.csv'):
+def load_fund_profiles(path=None):
+    if path is None:
+        if os.path.exists('data/processed/fund_universe_profiles_real.csv'):
+            path = 'data/processed/fund_universe_profiles_real.csv'
+        else:
+            path = 'data/synthetic/fund_universe_profiles.csv'
     if not os.path.exists(path):
         raise FileNotFoundError(f"File {path} not found.")
     return pd.read_csv(path)
 
-def load_13f_holdings(path='data/synthetic/sec_13f_ria_ownership.csv'):
+def load_13f_holdings(path=None):
+    if path is None:
+        if os.path.exists('data/processed/sec_13f_ria_ownership_real.csv'):
+            path = 'data/processed/sec_13f_ria_ownership_real.csv'
+        else:
+            path = 'data/synthetic/sec_13f_ria_ownership.csv'
     if not os.path.exists(path):
         raise FileNotFoundError(f"File {path} not found.")
     return pd.read_csv(path)
